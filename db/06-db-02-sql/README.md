@@ -21,18 +21,71 @@ services:
 ```docker
 docker ps
 ```
-![Результат](./img/Pic1.png)
-Порт не пробрасывал, потому что буду подключаться к контейнеру и работать в нем.  
+![Результат](./img/Pic1.png)  
+Порт не пробрасывал, потому что буду подключаться к контейнеру и работать в нем.    
 ```docker
-docker exec -it docker_compose-postgres-1 psql -U postgres
+docker exec -it docker-postgres-1 psql -U postgres
 ```
 ## Задача 2
-В БД из задачи 1: 
-- создайте пользователя test-admin-user и БД test_db;
-- в БД test_db создайте таблицу orders и clients (спeцификация таблиц ниже);
-- предоставьте привилегии на все операции пользователю test-admin-user на таблицы БД test_db;
-- создайте пользователя test-simple-user;
-- предоставьте пользователю test-simple-user права на SELECT/INSERT/UPDATE/DELETE этих таблиц БД test_db.
+В БД из задачи 1:   
+- создайте пользователя test-admin-user и БД test_db;  
+```
+postgres=# CREATE USER test-admin-user WITH PASSWORD 'pass';
+ERROR:  syntax error at or near "-"
+LINE 1: CREATE USER test-admin-user WITH PASSWORD 'pass';
+                        ^
+postgres=# CREATE USER test_admin_user WITH PASSWORD 'pass';
+CREATE ROLE
+postgres=# \du
+                                      List of roles
+    Role name    |                         Attributes                         | Member of 
+-----------------+------------------------------------------------------------+-----------
+ postgres        | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ test_admin_user |                                                            | {}
+```
+- в БД test_db создайте таблицу orders и clients (спeцификация таблиц ниже);  
+``` 
+postgres=# CREATE DATABASE test_db;
+CREATE DATABASE
+postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges   
+-----------+----------+----------+------------+------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ test_db   | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+(4 rows)
+
+```
+- предоставьте привилегии на все операции пользователю test-admin-user на таблицы БД test_db;  
+```
+postgres=# GRANT ALL PRIVILEGES ON DATABASE "test_db" to test_admin_user;
+GRANT
+postgres=# \c test_db
+You are now connected to database "test_db" as user "postgres".
+test_db=# GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO "test_admin_user";
+GRANT
+```
+- создайте пользователя test-simple-user; 
+```
+test_db=# CREATE USER test_simple_user;
+CREATE ROLE
+test_db=# \du
+                                       List of roles
+    Role name     |                         Attributes                         | Member of 
+------------------+------------------------------------------------------------+-----------
+ postgres         | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ test_admin_user  |                                                            | {}
+ test_simple_user |                                                            | {}
+```
+- предоставьте пользователю test-simple-user права на SELECT/INSERT/UPDATE/DELETE этих таблиц БД test_db.  
+```
+test_db=# GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO "test_simple_user";
+GRANT
+```
 Таблица orders:
 - id (serial primary key);
 - наименование (string);
