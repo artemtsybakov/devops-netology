@@ -21,7 +21,7 @@ services:
 ```docker
 docker ps
 ```
-[Результат](./img/Pic1.png)
+![Результат](./img/Pic1.png)
 Порт не пробрасывал, потому что буду подключаться к контейнеру и работать в нем.  
 ```docker
 docker exec -it docker_compose-postgres-1 psql -U postgres
