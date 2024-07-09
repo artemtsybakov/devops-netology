@@ -1,0 +1,8 @@
+{
+  "registry-mirrors": [
+    "https://cr.yandex/mirror",
+    "https://mirror.gcr.io",
+    "https://daocloud.io",
+    "https://registry.docker-cn.com"
+  ]
+}
