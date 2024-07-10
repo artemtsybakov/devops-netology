@@ -41,7 +41,7 @@ Hey, Netology
 - Предоставьте ответ в виде ссылки на https://hub.docker.com/<username_repo>/custom-nginx/general .
 </details>
 1. Установил docker.
-![version] (png/versions.png)
+![version] (./png/versions.png)
 https://hub.docker.com/r/tsybakov/custom-nginx/tags
 2. Файл 
 <details>
