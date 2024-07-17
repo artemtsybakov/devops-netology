@@ -31,3 +31,22 @@ remote: Total 53 (delta 15), reused 11 (delta 8), pack-reused 28
 Получение объектов: 100% (53/53), 44.64 КиБ | 457.00 КиБ/с, готово.
 Определение изменений: 100% (16/16), готово.
 ```
+## Задача 2
+Выполнил все операции. [Отчет о сканировании](vulnerabilities.csv)
+
+### Задача 3
+docker exec -it b9b05a384aba mysql -uroot -pYtReWq4321
+
+show databases;
+use virtd;
+show tables;
+
+`docker context create \
+    --docker host=ssh://artem@158.160.88.114 \
+    --description="Remote engine" \
+    my-remote-engine`
+
+my-remote-engine
+Successfully created context "my-remote-engine"
+
+sudo usermod -aG docker $artem
