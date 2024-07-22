@@ -31,3 +31,17 @@ remote: Total 53 (delta 15), reused 11 (delta 8), pack-reused 28
 Получение объектов: 100% (53/53), 44.64 КиБ | 457.00 КиБ/с, готово.
 Определение изменений: 100% (16/16), готово.
 ```
+
+## Задача 6.1
+sudo docker pull hashicorp/terraform:latest
+sudo docker run -ti --rm -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive hashicorp/terraform
+sudo docker image  save -o  /tmp/image.tar.gz hashicorp/terraform
+cd /tmp/
+sudo tar xf /tmp/image.tar.gz
+cd blobs/sha256
+sudo tar xf 4dcbcdcfdb7ea3f99552522f11af8c3e79c9c6423d85e40ddc627ca379af9c3e
+ls -la bin/terraform 
+
+
+## Задача 6.1
+sudo docker cp 461faec92273:/bin/terraform .
