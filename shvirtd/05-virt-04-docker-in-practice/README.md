@@ -49,7 +49,7 @@ sudo docker context create \
     --description="Remote engine" \
     yandex_vm1
 ```
-[docker context](./png/docker_context.png)
+![docker context](./png/docker_context.png)
 
 ## Задача 5
 Пока не получается сделать. 
@@ -95,16 +95,16 @@ mysqldump: Got error: 1045: "Plugin caching_sha2_password could not be loaded: E
 ```shell
 sudo docker pull hashicorp/terraform:latest
 ```
-[terraform pull](./png/terraform%20pull%20image.png)
+![terraform pull](./png/terraform%20pull%20image.png)
 ```shell
 sudo docker run -ti --rm -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive hashicorp/terraform
 ```
-[run dive](./png/run_dive.png)
+![run dive](./png/run_dive.png)
 
 ```shell
 sudo docker image  save -o  /tmp/image.tar.gz hashicorp/terraform
 ```
-[dive_image](./png/dive_image.png)
+![dive_image](./png/dive_image.png)
 ```shell
 cd /tmp/
 ```
@@ -120,7 +120,7 @@ sudo tar xf 4dcbcdcfdb7ea3f99552522f11af8c3e79c9c6423d85e40ddc627ca379af9c3e
 ```shell
 ls -la bin/terraform
 ```
-[terraform file dive](./png/terraform_file_dive.png) 
+![terraform file dive](./png/terraform_file_dive.png) 
 
 ## Задача 6.1
 Создадим контейнер.
@@ -131,4 +131,4 @@ docker run hashicorp/terraform -d
 ```shell
 sudo docker cp 461faec92273:/bin/terraform .
 ```
-[docker cp](./png/docker_cp.png)
+![docker cp](./png/docker_cp.png)
