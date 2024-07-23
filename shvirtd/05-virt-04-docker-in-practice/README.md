@@ -40,9 +40,9 @@ remote: Total 53 (delta 15), reused 11 (delta 8), pack-reused 28
 
 ## Задача 4
 
-[bash скрипт](https://github.com/artemtsybakov/shvirtd-example-python/blob/main/bash.sh)
-[Fork репозиторий](https://github.com/artemtsybakov/shvirtd-example-python/tree/main)
-![SQl запрос 2](./png/yacloud_mysql.png)
+[bash скрипт](https://github.com/artemtsybakov/shvirtd-example-python/blob/main/bash.sh) \
+[Fork репозиторий](https://github.com/artemtsybakov/shvirtd-example-python/tree/main) \
+![SQl запрос 2](./png/yacloud_mysql.png) \
 ```shell
 sudo docker context create \
     --docker host=ssh:artem@89.169.168.196 \
