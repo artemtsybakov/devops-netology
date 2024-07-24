@@ -54,6 +54,7 @@
    ![docker_ps1](./png/docker_ps.png)
 
 6. 
+ ![docker_ps2](./png/docker_ps2.png)
    
 
 
