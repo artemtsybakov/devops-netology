@@ -5,6 +5,8 @@
 *.tfstate
 *.tfstate.*
 
+!.terraformrc
+
 # Crash log files
 crash.log
 crash.*.log
