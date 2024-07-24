@@ -9,7 +9,7 @@
 
 ### Чек-лист готовности к домашнему заданию
 
-1. Скачайте и установите **Terraform** версии ~>1.8.4 . Приложите скриншот вывода команды ```terraform --version```.
+1. Скачайте и установите **Terraform** версии ~>1.8.4. Приложите скриншот вывода команды ```terraform --version```.
 2. Скачайте на свой ПК этот git-репозиторий. Исходный код для выполнения задания расположен в директории **01/src**.
 3. Убедитесь, что в вашей ОС установлен docker.
 
@@ -31,7 +31,7 @@
 
    ![terraform_validate](./png/terraform_validate.png)
 
-   После повторной проверки появились ещу две ошибки. Нужно исправить имена ресурсов.
+   После повторной проверки появились ещё две ошибки. Нужно исправить имена ресурсов.
    ![terraform_validate2](./png/terraform_validate2.png)
 
 5. Фрагмент файла.
@@ -53,8 +53,48 @@
    ```
    ![docker_ps1](./png/docker_ps.png)
 
-6. 
- ![docker_ps2](./png/docker_ps2.png)
+6. Когда выполняется команда с этим ключом, то пропускается интерактивное подтверждение (ввод команды yes). Эта опция 
+может быть полезна когда задача автоматизируется.
+
+   ![docker_ps2](./png/docker_ps2.png)
+
+7. Содержимое файла.
+
+   ```terraform
+   {
+        "version": 4,
+        "terraform_version": "1.8.4",
+        "serial": 11,
+        "lineage": "03868706-014b-c7b7-1106-97b688decaff",
+        "outputs": {},
+        "resources": [],
+        "check_results": null
+   }
+   ```
+
+8. В схеме ресурса установленна необязательная опция `keep_locally`. Неудалять образ при уничтожении всех ресурсов.
+
+   ```text
+   keep_locally (Boolean) If true, then the Docker image won't be deleted on destroy operation. 
+   If this is false, it will delete the image from the docker local storage on destroy operation.
+   ```
    
+### Задание 2
+
+![yandex_cloud_vm](./png/yandex_cloud_vm.png)
+
+[Ссылка на код](./src/main.tf) 
+
+### Задание 3
+
+![tofu](./png/tofu.png)
+
+Выдает ошибку.
+
+![tofu_error](./png/tofu_error.png)
+
+Исправляю версию. Запустилось. Результат такой же.
+
+![tofy_work_fine](./png/tofu_work_fine.png)
 
 
