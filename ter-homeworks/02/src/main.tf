@@ -34,7 +34,8 @@ resource "yandex_compute_instance" "platform_db" {
   }
 
   metadata = {
-    serial-port-enable = var.metadata["serial-port-enable"]
+    serial-port-enable = var.metadata.serial-port-enable
     ssh-keys           = var.metadata["ssh-keys"]
   }
 }
+

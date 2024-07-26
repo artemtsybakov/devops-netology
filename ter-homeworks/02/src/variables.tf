@@ -13,6 +13,11 @@ variable "default_zone" {
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
+variable "vpc_name" {
+  type        = string
+  default     = "develop"
+  description = "VPC network & subnet name"
+}
 variable "default_cidr" {
   type        = list(string)
   default     = ["10.0.1.0/24"]
@@ -63,23 +68,19 @@ variable "vm_db_zone" {
 
 variable "vm_resources" {
   type = map(object({
-    web = map(object({
-      cores         = number
-      memory        = number
-      core_fraction = number
-    })),
-    db = map(object({
-      cores         = number
-      memory        = number
-      core_fraction = number
-    }))
-  }))
+    cores         = number
+    memory        = number
+    core_fraction = number
+    })
+  )
   default = {}
 }
 variable "metadata" {
-  type = map(object({
+  type = object({
     serial-port-enable = number
     ssh-keys           = string
-  }))
-  default = {}
+    })
+}
+variable "test" {
+  type = tuple([map(list(string)),map(list(string)),map(list(string))])
 }

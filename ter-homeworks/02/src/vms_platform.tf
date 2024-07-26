@@ -9,11 +9,7 @@ variable "vm_web_platform_id" {
   default     = "standard-v1"
   description = "The type of virtual machine to create. The default is 'standard-v1'."
 }
-variable "vpc_name" {
-  type        = string
-  default     = "develop"
-  description = "VPC network & subnet name"
-}
+
 resource "yandex_vpc_subnet" "develop" {
   name           = var.vpc_name
   zone           = var.default_zone
@@ -44,7 +40,6 @@ resource "yandex_compute_instance" "platform" {
 
   metadata = {
     serial-port-enable = var.metadata.serial-port-enable
-    ssh-keys           = var.metadata.ssh-keys
+    ssh-keys           = var.metadata["ssh-keys"]
   }
-
 }
