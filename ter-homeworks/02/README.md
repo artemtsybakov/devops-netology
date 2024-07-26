@@ -33,3 +33,13 @@ terraform init
 
 ![output](./png/output.png)
 
+### Задание 5
+
+Продолжил выполнение ДР. На следующий день. В "Outputs" видны новые имена ВМ.
+
+![new_names](./png/new_names.png)
+
+### Задание 6
+
+
+

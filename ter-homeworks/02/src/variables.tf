@@ -29,12 +29,12 @@ variable "vpc_name_db" {
   description = "VPC network & subnet name"
 }
 
-###ssh vars
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "<your_ssh_ed25519_key>"
-  description = "ssh-keygen -t ed25519"
-}
+# ###ssh vars
+# variable "vms_ssh_root_key" {
+#   type        = string
+#   default     = "<your_ssh_ed25519_key>"
+#   description = "ssh-keygen -t ed25519"
+# }
 
 ###yandex compute image
 variable "image_family" {
@@ -59,4 +59,27 @@ variable "vm_db_zone" {
   type        = string
   default     = "ru-central1-b"
   description = "The availability zone where the virtual machine will be created. If it is not provided, the default provider folder is used."
+}
+
+variable "vm_resources" {
+  type = map(object({
+    web = map(object({
+      cores         = number
+      memory        = number
+      core_fraction = number
+    })),
+    db = map(object({
+      cores         = number
+      memory        = number
+      core_fraction = number
+    }))
+  }))
+  default = {}
+}
+variable "metadata" {
+  type = map(object({
+    serial-port-enable = number
+    ssh-keys           = string
+  }))
+  default = {}
 }
