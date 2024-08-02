@@ -1,4 +1,5 @@
 resource "yandex_compute_instance" "count-vm" {
+  depends_on = [yandex_compute_instance.for_each-vm]
   count = length(var.web_servers)
   name = "web-server-${count.index+1}"
   resources {
@@ -13,7 +14,7 @@ resource "yandex_compute_instance" "count-vm" {
   }
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
-    security_group_ids = ["example_dynamic"]
+    security_group_ids = [yandex_vpc_security_group.example.id]
     nat       = true
   }
   scheduling_policy {

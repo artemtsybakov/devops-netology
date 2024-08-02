@@ -53,9 +53,16 @@ variable "vm_resources" {
 ###yandex compute instance for_each-vm
 variable "each_vm" {
   type = list(object({
-    vm_name      = string,
-    cpu          = number,
-    ram          = number,
+    vm_name      = string
+    cpu          = number
+    fraction     = number
+    ram          = number
     disk_volume  = number
   }))
+}
+
+###yandex_compute_disk" "disk_vm"
+variable "storage_disk" {
+  type = list(number)
+  description = "Quantity of disk"
 }
