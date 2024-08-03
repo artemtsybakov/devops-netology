@@ -5,7 +5,8 @@ resource "yandex_compute_disk" "disk_vm" {
 
 resource "yandex_compute_instance" "storage" {
   depends_on = [yandex_compute_disk.disk_vm]
-  name = "storage"
+  name = var.disk_vm_name
+  hostname = var.disk_vm_name
   resources {
     cores         = 2
     memory        = 1

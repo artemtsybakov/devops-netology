@@ -49,6 +49,10 @@ variable "vm_resources" {
   )
   default = {}
 }
+variable "count-vm_name" {
+  type = string
+  default = "Web"
+}
 
 ###yandex compute instance for_each-vm
 variable "each_vm" {
@@ -62,6 +66,11 @@ variable "each_vm" {
 }
 
 ###yandex_compute_disk" "disk_vm"
+variable "disk_vm_name" {
+  type = string
+  default = "storage"
+}
+
 variable "storage_disk" {
   type = list(number)
   description = "Quantity of disk"

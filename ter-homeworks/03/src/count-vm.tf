@@ -1,7 +1,8 @@
 resource "yandex_compute_instance" "count-vm" {
   depends_on = [yandex_compute_instance.for_each-vm]
   count = length(var.web_servers)
-  name = "web-server-${count.index+1}"
+  name =  join("", [var.count-vm_name, count.index+1])
+  hostname = join("", [var.count-vm_name, count.index+1])
   resources {
     cores         = var.vm_resources.web.cores
     memory        = var.vm_resources.web.memory
