@@ -33,3 +33,5 @@
 ![yandex_vm_storage_add_disks.png](./png/yandex_vm_storage_add_disks.png)
 
 ### Задание 4
+
+![Host.ini](./png/hosts.png)
