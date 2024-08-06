@@ -35,3 +35,10 @@
 ### Задание 4
 
 ![Host.ini](./png/hosts.png)
+
+### Задание 5
+
+Добавил output для ВМ созданных через count и for each.
+
+![outputs.png](./png/outputs.png)
+
