@@ -1,15 +1,3 @@
-output "count-vm" {
-  value = [ for vm in yandex_compute_instance.count-vm[*]: {
-    name = vm.name
-    id = vm.id
-    fqdn = vm.fqdn
-  }]
-}
-
-output "for_each" {
-  value = [ for vm in yandex_compute_instance.for_each-vm: {
-    name = vm.name
-    id = vm.id
-    fqdn = vm.fqdn
-  }]
+output "vm_info" {
+  value = concat(local.output_count-vm, local.output_for_each-vm, local.output_storage)
 }
