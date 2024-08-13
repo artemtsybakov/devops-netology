@@ -74,3 +74,38 @@ Cкриншот информации из terraform console о своем мод
    
    ![terraform_plan_after_import.png](./png/terraform_plan_after_import.png)
 
+### Задание 4
+
+Код
+```terraform
+#создаем сеть
+resource "yandex_vpc_network" "develop" {
+  name = var.env_name
+}
+
+#создаем подсеть
+resource "yandex_vpc_subnet" "develop" {
+   #Преобразовываем list(object) в map(object) с которым работает for_each.
+   #каждую подсеть мы идентифицируем уникальным ключом именем зоны.
+  for_each = {for zone in var.subnets : zone.zone => zone }
+  name           = "${var.env_name}-${each.key}"
+  zone           = each.key
+  network_id     = yandex_vpc_network.develop.id
+  v4_cidr_blocks = [each.value.cidr]
+}
+```
+
+
+[terraform plan](./src/plan.md)
+
+Скриншот из консоли.
+
+![terraform_plan_vpc.png](./png/terraform_plan_vpc.png)
+
+Скриншот из YC.
+
+![terraform_vpc_yc.png](./png/terraform_vpc_yc.png)
+
+![terraform_vpc_develop_subnet.png](./png/terraform_vpc_develop_subnet.png)
+
+![terraform_vpc_prod_subnets.png](./png/terraform_vpc_prod_subnets.png)

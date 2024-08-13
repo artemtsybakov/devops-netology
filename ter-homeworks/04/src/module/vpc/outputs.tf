@@ -3,5 +3,5 @@ output "vpc_id" {
 }
 
 output "subnet_ids" {
-  value = yandex_vpc_subnet.develop.id
+  value = tolist(values(yandex_vpc_subnet.develop)[*].id)
 }

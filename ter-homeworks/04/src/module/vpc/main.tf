@@ -14,8 +14,9 @@ resource "yandex_vpc_network" "develop" {
 
 #создаем подсеть
 resource "yandex_vpc_subnet" "develop" {
-  name           = var.env_name
-  zone           = var.zone
+  for_each = {for zone in var.subnets : zone.zone => zone }
+  name           = "${var.env_name}-${each.key}"
+  zone           = each.key
   network_id     = yandex_vpc_network.develop.id
-  v4_cidr_blocks = var.cidr
+  v4_cidr_blocks = [each.value.cidr]
 }
