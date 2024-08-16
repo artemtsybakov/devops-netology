@@ -1,3 +1,23 @@
 services:
   centos:
-    image:
+    image: centos:7
+    container_name: centos
+    networks:
+      lab:
+        ipv4_address:
+          172.20.0.3
+    tty: true
+  ubuntu:
+    image: ubuntu-python:latest
+    container_name: ubuntu
+    networks:
+      lab:
+        ipv4_address:
+          172.20.0.2
+    tty: true
+
+networks:
+  lab:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
