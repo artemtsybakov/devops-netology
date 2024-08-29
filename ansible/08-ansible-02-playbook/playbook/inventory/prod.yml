@@ -2,4 +2,4 @@
 clickhouse:
   hosts:
     clickhouse-01:
-      ansible_host: 89.169.136.8
+      ansible_host: 89.169.133.230

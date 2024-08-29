@@ -14,14 +14,14 @@
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/deb/pool/main/c/{{ item }}/{{ item }}_{{ clickhouse_version }}_amd64.deb"
             dest: "./{{ item }}_{{ clickhouse_version }}_amd64.deb"
-            mode: 644
+            mode: '644'
           with_items: "{{ clickhouse_packages }}"
       rescue:
         - name: Get clickhouse distribute
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/deb/pool/main/c/clickhouse-common-static/clickhouse-common-static_{{ clickhouse_version }}_amd64.deb"
             dest: "./clickhouse-common-static_{{ clickhouse_version }}_amd64.deb"
-            mode: 644
+            mode: '644'
     - name: Install clickhouse packages
       become: true
       ansible.builtin.apt:
@@ -42,3 +42,36 @@
       register: create_db
       failed_when: create_db.rc != 0 and create_db.rc != 82
       changed_when: create_db.rc == 0
+
+- name: Install Vector
+  hosts: clickhouse
+  handlers:
+    - name: Start vector service
+      become: true
+      ansible.builtin.service:
+        name: vector
+        state: restarted
+  tasks:
+    - name: Download Vector distribute
+      ansible.builtin.get_url:
+        url: "https://apt.vector.dev/pool/v/ve/vector_0.40.1-1_{{ arch }}.deb"
+        dest: "./vector_0.40.1-1_{{ arch }}.deb"
+        mode: '644'
+    - name: Install Vector distribute
+      become: true
+      ansible.builtin.apt:
+        deb: /home/artem/vector_0.40.1-1_{{ arch }}.deb
+      notify: Start vector service
+      tags: install vector
+    - name: Vector config
+      become: true
+      ansible.builtin.template:
+        src: templates/vector.j2
+        dest: /etc/vector/vector.yaml
+        mode: '644'
+      tags: config vector
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
+    - name: Sleep for 60 seconds and continue with play
+      ansible.builtin.wait_for:
+        timeout: 60
