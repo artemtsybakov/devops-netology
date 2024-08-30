@@ -31,7 +31,11 @@ variable "default_cidr" {
 }
 
 ### yandex_compute_instance clickhouse
-variable "vm_name" {
+variable "vm_name_clickhouse" {
+  type = string
+}
+### yandex_compute_instance vector
+variable "vm_name_vector" {
   type = string
 }
 

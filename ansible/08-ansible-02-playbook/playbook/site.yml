@@ -44,7 +44,7 @@
       changed_when: create_db.rc == 0
 
 - name: Install Vector
-  hosts: clickhouse
+  hosts: vector
   handlers:
     - name: Start vector service
       become: true
@@ -72,6 +72,3 @@
       tags: config vector
     - name: Flush handlers
       ansible.builtin.meta: flush_handlers
-    - name: Sleep for 60 seconds and continue with play
-      ansible.builtin.wait_for:
-        timeout: 60
