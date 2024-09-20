@@ -29,6 +29,18 @@ variable "default_cidr" {
   default     = ["10.0.1.0/24"]
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
+variable "clickhouseip" {
+  type = string
+  description = "Clickhouse IP address"
+}
+variable "vectorip" {
+  type = string
+  description = "Clickhouse IP address"
+}
+variable "lighthouseip" {
+  type = string
+  description = "Clickhouse IP address"
+}
 
 ### yandex_compute_instance clickhouse
 variable "vm_name_clickhouse" {
@@ -36,6 +48,10 @@ variable "vm_name_clickhouse" {
 }
 ### yandex_compute_instance vector
 variable "vm_name_vector" {
+  type = string
+}
+### yandex_compute_instance vector
+variable "vm_name_lighthouse" {
   type = string
 }
 

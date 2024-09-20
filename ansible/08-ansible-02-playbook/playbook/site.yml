@@ -72,3 +72,52 @@
       tags: config vector
     - name: Flush handlers
       ansible.builtin.meta: flush_handlers
+
+- name: Install Nginx
+  hosts: lighthouse
+  become: true
+  tasks:
+    - name: Install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: latest
+        update_cache: yes
+    - name: Remove default nginx configuration
+      ansible.builtin.file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+    - name: Nginx config
+      ansible.builtin.template:
+        src: templates/nginx.j2
+        dest: /etc/nginx/sites-available/static-site-config
+        mode: '644'
+    - name: Enable website configuration
+      file:
+        src: /etc/nginx/sites-available/static-site-config
+        dest: /etc/nginx/sites-enabled/static-site-config
+        state: link
+    - name: Ensure nginx is running
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+  vars:
+    user: "artem"
+
+- name: Install LightHouse
+  hosts: lighthouse
+  become: true
+  tasks:
+    - name: Install git
+      ansible.builtin.apt:
+        name: git
+        state: latest
+    - name: Remove default nginx site
+      ansible.builtin.file:
+        path: //var/www/html/index.nginx-debian.html
+        state: absent
+    - name: Git clone
+      ansible.builtin.git:
+        repo: https://github.com/VKCOM/lighthouse
+        dest: /var/www/html/
+  tags: instlight

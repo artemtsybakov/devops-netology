@@ -33,11 +33,13 @@ transforms:
 
 # Print parsed logs to stdout
 sinks:
-  my_sink_id:
+  out:
     type: clickhouse
     inputs:
-      - my-source-or-transform-id
-    endpoint: http://localhost:8123
+      - dummy_logs
+    compression: gzip
+    database: mydatabase
+    endpoint: http://10.0.1.2:8123
     table: logs
 
 # Vector's GraphQL API (disabled by default)
